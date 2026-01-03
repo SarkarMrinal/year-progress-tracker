@@ -571,6 +571,484 @@
       border-radius: 12px;
       color: #f59e0b;
     }
+
+    /* Goals Sidebar Styles */
+    .goals-sidebar {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      width: 320px;
+      background: linear-gradient(180deg, rgba(18, 18, 26, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 40;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -20px 0 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .goals-sidebar.visible {
+      transform: translateX(0);
+    }
+
+    .goals-sidebar-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .goals-sidebar-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fafafa;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .goals-sidebar-close {
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      color: #71717a;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .goals-sidebar-close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fafafa;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .goals-sidebar-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .goals-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .goals-section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #71717a;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .goal-card {
+      background: linear-gradient(135deg, rgba(26, 26, 36, 0.7) 0%, rgba(20, 20, 28, 0.8) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .goal-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.3), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .goal-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .goal-card:hover::before {
+      opacity: 1;
+    }
+
+    .goal-card-pinned {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(26, 26, 36, 0.9) 100%);
+      border-color: rgba(245, 158, 11, 0.3);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.1);
+    }
+
+    .goal-card-pinned::before {
+      opacity: 1;
+      background: linear-gradient(90deg, rgba(245, 158, 11, 0.6), rgba(251, 191, 36, 0.8), rgba(245, 158, 11, 0.6));
+    }
+
+    .goal-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .goal-card-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #fafafa;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .goal-card-actions {
+      display: flex;
+      gap: 0.25rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .goal-card:hover .goal-card-actions {
+      opacity: 1;
+    }
+
+    .goal-action-btn {
+      padding: 0.35rem;
+      border-radius: 6px;
+      border: none;
+      background: rgba(255, 255, 255, 0.05);
+      color: #71717a;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .goal-action-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fafafa;
+    }
+
+    .goal-action-btn.pin-active {
+      color: #f59e0b;
+      background: rgba(245, 158, 11, 0.15);
+    }
+
+    .goal-action-btn.delete:hover {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+    }
+
+    .goal-card-description {
+      font-size: 0.8rem;
+      color: #71717a;
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    .goal-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .goal-card-due {
+      font-size: 0.7rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #71717a;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .goal-card-due.overdue {
+      color: #ef4444;
+    }
+
+    .goal-card-due.soon {
+      color: #f59e0b;
+    }
+
+    .goal-card-progress-label {
+      font-size: 0.7rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #f59e0b;
+      font-weight: 500;
+    }
+
+    .goal-progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .goal-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      border-radius: 2px;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .goals-add-btn {
+      width: 100%;
+      padding: 0.875rem;
+      border-radius: 10px;
+      border: 2px dashed rgba(255, 255, 255, 0.15);
+      background: transparent;
+      color: #71717a;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .goals-add-btn:hover {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.05);
+      color: #f59e0b;
+    }
+
+    .goals-toggle-btn {
+      position: fixed;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 35;
+      padding: 0.75rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(18, 18, 26, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #71717a;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .goals-toggle-btn:hover {
+      border-color: rgba(245, 158, 11, 0.4);
+      color: #f59e0b;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .goals-toggle-btn.has-pinned {
+      border-color: rgba(245, 158, 11, 0.3);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+    }
+
+    .goals-toggle-btn.has-pinned::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 8px;
+      height: 8px;
+      background: #f59e0b;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+    }
+
+    .goals-sidebar.visible~.goals-toggle-btn {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .goals-empty {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #3f3f46;
+    }
+
+    .goals-empty-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 1rem;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      color: #3f3f46;
+    }
+
+    .goals-empty-text {
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .goals-empty-hint {
+      font-size: 0.75rem;
+      color: #27272a;
+    }
+
+    /* Goal Modal Specific */
+    .goal-modal-field {
+      margin-bottom: 1rem;
+    }
+
+    .goal-modal-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #71717a;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .goal-modal-textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+      color: #fafafa;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      resize: vertical;
+      min-height: 80px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .goal-modal-textarea::placeholder {
+      color: #3f3f46;
+    }
+
+    .goal-modal-textarea:focus {
+      border-color: rgba(245, 158, 11, 0.5);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+    }
+
+    .goal-modal-row {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .goal-modal-row .goal-modal-field {
+      flex: 1;
+    }
+
+    /* Date Input Styling */
+    input[type="date"].custom-modal-input {
+      color-scheme: dark;
+      cursor: pointer;
+    }
+
+    input[type="date"].custom-modal-input::-webkit-calendar-picker-indicator {
+      filter: invert(0.7) sepia(1) saturate(5) hue-rotate(5deg);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    input[type="date"].custom-modal-input::-webkit-calendar-picker-indicator:hover {
+      filter: invert(0.6) sepia(1) saturate(8) hue-rotate(10deg);
+      background: rgba(245, 158, 11, 0.15);
+    }
+
+    input[type="date"].custom-modal-input::-webkit-datetime-edit {
+      color: #fafafa;
+    }
+
+    input[type="date"].custom-modal-input::-webkit-datetime-edit-fields-wrapper {
+      padding: 0;
+    }
+
+    input[type="date"].custom-modal-input::-webkit-datetime-edit-text,
+    input[type="date"].custom-modal-input::-webkit-datetime-edit-month-field,
+    input[type="date"].custom-modal-input::-webkit-datetime-edit-day-field,
+    input[type="date"].custom-modal-input::-webkit-datetime-edit-year-field {
+      color: #fafafa;
+    }
+
+    input[type="date"].custom-modal-input:not(:valid)::-webkit-datetime-edit {
+      color: #3f3f46;
+    }
+
+    .goal-progress-input-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .goal-progress-input-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .goal-progress-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      outline: none;
+    }
+
+    .goal-progress-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+      transition: transform 0.2s ease;
+    }
+
+    .goal-progress-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+    }
+
+    .goal-progress-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #f59e0b;
+      min-width: 45px;
+      text-align: right;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .goals-sidebar {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .goals-toggle-btn {
+        right: 1rem;
+        bottom: 6rem;
+        top: auto;
+        transform: none;
+      }
+
+      .goals-toggle-btn:hover {
+        transform: scale(1.05);
+      }
+    }
   </style>
 </head>
 
@@ -592,6 +1070,66 @@
       </div>
     </div>
   </div>
+
+  <!-- Goal Modal (Create/Edit) -->
+  <div id="goal-modal-overlay" class="custom-modal-overlay">
+    <div class="custom-modal" style="max-width: 450px;">
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <div class="custom-modal-icon" style="margin-bottom: 0;">
+          <i data-lucide="target" class="w-6 h-6"></i>
+        </div>
+        <h2 id="goal-modal-title" class="custom-modal-title" style="margin-bottom: 0;">New Goal</h2>
+      </div>
+      <p class="custom-modal-subtitle">Set a goal to track your progress</p>
+
+      <div class="goal-modal-field">
+        <label class="goal-modal-label">Goal Title *</label>
+        <input type="text" id="goal-title-input" class="custom-modal-input" autocomplete="off" />
+      </div>
+
+      <div class="goal-modal-field">
+        <label class="goal-modal-label">Description</label>
+        <textarea id="goal-description-input" class="goal-modal-textarea"></textarea>
+      </div>
+
+      <div class="goal-modal-field">
+        <label class="goal-modal-label">Progress</label>
+        <div class="goal-progress-input-container">
+          <input type="range" id="goal-progress-input" class="goal-progress-slider" min="0" max="100" value="0" />
+          <span id="goal-progress-display" class="goal-progress-value">0%</span>
+        </div>
+      </div>
+
+      <input type="hidden" id="goal-edit-id" value="" />
+
+      <div class="custom-modal-buttons">
+        <button id="goal-modal-cancel" type="button" class="custom-modal-btn custom-modal-btn-secondary">Cancel</button>
+        <button id="goal-modal-submit" type="button" class="custom-modal-btn custom-modal-btn-primary">Save
+          Goal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Goals Sidebar -->
+  <aside id="goals-sidebar" class="goals-sidebar">
+    <header class="goals-sidebar-header">
+      <h2 class="goals-sidebar-title">
+        <i data-lucide="target" class="w-5 h-5 text-accent"></i>
+        My Goals
+      </h2>
+      <button id="goals-sidebar-close" type="button" class="goals-sidebar-close" aria-label="Close goals sidebar">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </header>
+    <div id="goals-sidebar-content" class="goals-sidebar-content">
+      <!-- Goals will be rendered here by JavaScript -->
+    </div>
+  </aside>
+
+  <!-- Goals Toggle Button -->
+  <button id="goals-toggle-btn" type="button" class="goals-toggle-btn" aria-label="Toggle goals sidebar">
+    <i data-lucide="target" class="w-5 h-5"></i>
+  </button>
 
   <!-- Enhanced Ambient Orbs -->
   <div
@@ -803,7 +1341,8 @@
         </div>
         <div class="space-y-2">
           <div class="w-full h-2.5 bg-white/5 rounded-full overflow-hidden">
-            <div id="week-bar" class="h-full bg-accent/90 rounded-full transition-all duration-1000 ease-out w-0"></div>
+            <div id="week-bar" class="h-full bg-accent/90 rounded-full transition-all duration-1000 ease-out w-0">
+            </div>
           </div>
           <div class="flex justify-between text-xs text-textDim font-mono">
             <span id="week-day">Monday</span>
@@ -853,7 +1392,8 @@
         </div>
         <div class="space-y-2">
           <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-            <div id="hours-bar" class="h-full bg-accent/80 rounded-full transition-all duration-700 ease-out w-0"></div>
+            <div id="hours-bar" class="h-full bg-accent/80 rounded-full transition-all duration-700 ease-out w-0">
+            </div>
           </div>
           <div class="flex justify-between text-xs text-textDim font-mono">
             <span><span id="hours-passed">0</span> used</span>
@@ -902,7 +1442,8 @@
         </div>
         <div class="space-y-2">
           <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-            <div id="weeks-bar" class="h-full bg-accent/80 rounded-full transition-all duration-700 ease-out w-0"></div>
+            <div id="weeks-bar" class="h-full bg-accent/80 rounded-full transition-all duration-700 ease-out w-0">
+            </div>
           </div>
           <div class="flex justify-between text-xs text-textDim font-mono">
             <span><span id="weeks-passed">0</span> done</span>
@@ -1036,6 +1577,46 @@
     let lastActivityTime = Date.now();
     let afkActivationTime = 0; // Track when AFK was activated to add grace period
     let afkTypingIntervalId = null; // Track typing animation interval
+
+    // Goals state
+    const GOALS_STORAGE_KEY = "yptGoals";
+    let goalsData = {
+      goals: [],
+      pinnedGoalId: null,
+      sidebarVisible: false
+    };
+
+    // Load goals from localStorage on init
+    function loadGoalsFromStorage() {
+      try {
+        const stored = localStorage.getItem(GOALS_STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          goalsData = {
+            goals: Array.isArray(parsed.goals) ? parsed.goals : [],
+            pinnedGoalId: parsed.pinnedGoalId || null,
+            sidebarVisible: parsed.sidebarVisible ?? false
+          };
+        }
+      } catch (e) {
+        console.warn("Could not load goals from storage:", e);
+      }
+    }
+
+    // Save goals to localStorage
+    function saveGoalsToStorage() {
+      try {
+        localStorage.setItem(GOALS_STORAGE_KEY, JSON.stringify(goalsData));
+      } catch (e) {
+        console.warn("Could not save goals to storage:", e);
+      }
+    }
+
+    // Generate unique ID for goals
+    function generateGoalId() {
+      return 'goal_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
 
     // Cached DOM element references (populated on DOMContentLoaded)
     const DOM = {};
@@ -1671,6 +2252,427 @@
       });
     }
 
+    // ============ GOALS MANAGEMENT ============
+
+    // Toggle goals sidebar visibility
+    function toggleGoalsSidebar(forceState = null) {
+      const sidebar = document.getElementById('goals-sidebar');
+      const toggleBtn = document.getElementById('goals-toggle-btn');
+      if (!sidebar) return;
+
+      const newState = forceState !== null ? forceState : !goalsData.sidebarVisible;
+      goalsData.sidebarVisible = newState;
+      sidebar.classList.toggle('visible', newState);
+      saveGoalsToStorage();
+    }
+
+    // Update toggle button appearance based on pinned status
+    function updateGoalsToggleButton() {
+      const toggleBtn = document.getElementById('goals-toggle-btn');
+      if (!toggleBtn) return;
+
+      const hasPinned = goalsData.pinnedGoalId && goalsData.goals.some(g => g.id === goalsData.pinnedGoalId);
+      toggleBtn.classList.toggle('has-pinned', hasPinned);
+    }
+
+    // Add a new goal
+    function addGoal(goalData) {
+      const newGoal = {
+        id: generateGoalId(),
+        title: goalData.title.trim(),
+        description: (goalData.description || '').trim(),
+        dueDate: goalData.dueDate || null,
+        progress: Math.min(100, Math.max(0, parseInt(goalData.progress) || 0)),
+        createdAt: Date.now(),
+        isPinned: false
+      };
+      goalsData.goals.unshift(newGoal);
+      saveGoalsToStorage();
+      renderGoals();
+      return newGoal;
+    }
+
+    // Edit an existing goal
+    function editGoal(goalId, updates) {
+      const goalIndex = goalsData.goals.findIndex(g => g.id === goalId);
+      if (goalIndex === -1) return null;
+
+      goalsData.goals[goalIndex] = {
+        ...goalsData.goals[goalIndex],
+        title: updates.title?.trim() || goalsData.goals[goalIndex].title,
+        description: (updates.description || '').trim(),
+        dueDate: updates.dueDate || null,
+        progress: Math.min(100, Math.max(0, parseInt(updates.progress) || 0))
+      };
+      saveGoalsToStorage();
+      renderGoals();
+      return goalsData.goals[goalIndex];
+    }
+
+    // Delete a goal
+    function deleteGoal(goalId) {
+      const goalIndex = goalsData.goals.findIndex(g => g.id === goalId);
+      if (goalIndex === -1) return false;
+
+      // If deleting pinned goal, clear pinned state
+      if (goalsData.pinnedGoalId === goalId) {
+        goalsData.pinnedGoalId = null;
+      }
+
+      goalsData.goals.splice(goalIndex, 1);
+      saveGoalsToStorage();
+      renderGoals();
+      updateGoalsToggleButton();
+      return true;
+    }
+
+    // Pin a goal (only 1 can be pinned at a time)
+    function pinGoal(goalId) {
+      const goal = goalsData.goals.find(g => g.id === goalId);
+      if (!goal) return false;
+
+      // If already pinned, unpin it
+      if (goalsData.pinnedGoalId === goalId) {
+        goalsData.pinnedGoalId = null;
+      } else {
+        // Pin this goal (automatically unpins any other)
+        goalsData.pinnedGoalId = goalId;
+      }
+
+      saveGoalsToStorage();
+      renderGoals();
+      updateGoalsToggleButton();
+      return true;
+    }
+
+    // Get due date status for styling
+    function getDueDateStatus(dueDate) {
+      if (!dueDate) return { class: '', text: '' };
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const due = new Date(dueDate);
+      due.setHours(0, 0, 0, 0);
+
+      const diffDays = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+
+      if (diffDays < 0) {
+        return { class: 'overdue', text: `${Math.abs(diffDays)}d overdue` };
+      } else if (diffDays === 0) {
+        return { class: 'soon', text: 'Due today' };
+      } else if (diffDays <= 7) {
+        return { class: 'soon', text: `${diffDays}d left` };
+      } else {
+        const options = { month: 'short', day: 'numeric' };
+        return { class: '', text: due.toLocaleDateString('en-US', options) };
+      }
+    }
+
+    // Render a single goal card
+    function renderGoalCard(goal, isPinned = false) {
+      const dueStatus = getDueDateStatus(goal.dueDate);
+      const pinBtnClass = isPinned ? 'pin-active' : '';
+
+      return `
+          <div class="goal-card ${isPinned ? 'goal-card-pinned' : ''}" data-goal-id="${goal.id}">
+            <div class="goal-card-header">
+              <div class="goal-card-title">${escapeHtml(goal.title)}</div>
+              <div class="goal-card-actions">
+                <button type="button" class="goal-action-btn ${pinBtnClass}" data-action="pin" data-goal-id="${goal.id}" title="${isPinned ? 'Unpin' : 'Pin'}">
+                  <i data-lucide="pin" class="w-3.5 h-3.5"></i>
+                </button>
+                <button type="button" class="goal-action-btn" data-action="edit" data-goal-id="${goal.id}" title="Edit">
+                  <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                </button>
+                <button type="button" class="goal-action-btn delete" data-action="delete" data-goal-id="${goal.id}" title="Delete">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+            ${goal.description ? `<div class="goal-card-description">${escapeHtml(goal.description)}</div>` : ''}
+            <div class="goal-card-meta">
+              ${goal.dueDate ? `<div class="goal-card-due ${dueStatus.class}"><i data-lucide="calendar" class="w-3 h-3"></i>${dueStatus.text}</div>` : '<div></div>'}
+              <div class="goal-card-progress-label">${goal.progress}%</div>
+            </div>
+            <div class="goal-progress-bar">
+              <div class="goal-progress-fill" style="width: ${goal.progress}%"></div>
+            </div>
+          </div>
+        `;
+    }
+
+    // Escape HTML to prevent XSS
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Render all goals in sidebar
+    function renderGoals() {
+      const container = document.getElementById('goals-sidebar-content');
+      if (!container) return;
+
+      const pinnedGoal = goalsData.pinnedGoalId
+        ? goalsData.goals.find(g => g.id === goalsData.pinnedGoalId)
+        : null;
+
+      const otherGoals = goalsData.goals.filter(g => g.id !== goalsData.pinnedGoalId);
+
+      let html = '';
+
+      // Pinned section
+      if (pinnedGoal) {
+        html += `
+            <div class="goals-section">
+              <div class="goals-section-title">
+                <i data-lucide="pin" class="w-3 h-3"></i>
+                Pinned
+              </div>
+              ${renderGoalCard(pinnedGoal, true)}
+            </div>
+          `;
+      }
+
+      // All goals section
+      html += `
+          <div class="goals-section">
+            <div class="goals-section-title">
+              <i data-lucide="list" class="w-3 h-3"></i>
+              ${pinnedGoal ? 'Other Goals' : 'All Goals'}
+            </div>
+        `;
+
+      if (otherGoals.length > 0) {
+        html += otherGoals.map(g => renderGoalCard(g, false)).join('');
+      } else if (!pinnedGoal) {
+        html += `
+            <div class="goals-empty">
+              <div class="goals-empty-icon">
+                <i data-lucide="target" class="w-6 h-6"></i>
+              </div>
+              <div class="goals-empty-text">No goals yet</div>
+              <div class="goals-empty-hint">Add your first goal to get started</div>
+            </div>
+          `;
+      }
+
+      html += `
+          </div>
+          <button type="button" class="goals-add-btn" id="goals-add-btn">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            Add Goal
+          </button>
+        `;
+
+      container.innerHTML = html;
+
+      // Re-initialize Lucide icons for new elements
+      lucide.createIcons();
+
+      // Attach event listeners
+      attachGoalEventListeners();
+    }
+
+    // Attach event listeners to goal cards
+    function attachGoalEventListeners() {
+      const container = document.getElementById('goals-sidebar-content');
+      if (!container) return;
+
+      // Add button
+      const addBtn = container.querySelector('#goals-add-btn');
+      if (addBtn) {
+        addBtn.addEventListener('click', () => showGoalModal());
+      }
+
+      // Action buttons (pin, edit, delete)
+      container.querySelectorAll('.goal-action-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const action = btn.dataset.action;
+          const goalId = btn.dataset.goalId;
+
+          switch (action) {
+            case 'pin':
+              pinGoal(goalId);
+              break;
+            case 'edit':
+              const goal = goalsData.goals.find(g => g.id === goalId);
+              if (goal) showGoalModal(goal);
+              break;
+            case 'delete':
+              if (confirm('Delete this goal?')) {
+                deleteGoal(goalId);
+              }
+              break;
+          }
+        });
+      });
+    }
+
+    // Show goal modal (create or edit)
+    function showGoalModal(existingGoal = null) {
+      const overlay = document.getElementById('goal-modal-overlay');
+      const titleEl = document.getElementById('goal-modal-title');
+      const titleInput = document.getElementById('goal-title-input');
+      const descInput = document.getElementById('goal-description-input');
+      const progressInput = document.getElementById('goal-progress-input');
+      const progressDisplay = document.getElementById('goal-progress-display');
+      const editIdInput = document.getElementById('goal-edit-id');
+      const submitBtn = document.getElementById('goal-modal-submit');
+
+      if (!overlay) return;
+
+      // Reset form
+      if (existingGoal) {
+        titleEl.textContent = 'Edit Goal';
+        titleInput.value = existingGoal.title;
+        descInput.value = existingGoal.description || '';
+        progressInput.value = existingGoal.progress || 0;
+        progressDisplay.textContent = (existingGoal.progress || 0) + '%';
+        editIdInput.value = existingGoal.id;
+        submitBtn.textContent = 'Update Goal';
+      } else {
+        titleEl.textContent = 'New Goal';
+        titleInput.value = '';
+        descInput.value = '';
+        progressInput.value = 0;
+        progressDisplay.textContent = '0%';
+        editIdInput.value = '';
+        submitBtn.textContent = 'Save Goal';
+      }
+
+      overlay.classList.add('active');
+      setTimeout(() => titleInput.focus(), 100);
+    }
+
+    // Hide goal modal
+    function hideGoalModal() {
+      const overlay = document.getElementById('goal-modal-overlay');
+      if (overlay) {
+        overlay.classList.remove('active');
+      }
+    }
+
+    // Handle goal form submission
+    function handleGoalSubmit() {
+      const titleInput = document.getElementById('goal-title-input');
+      const descInput = document.getElementById('goal-description-input');
+      const progressInput = document.getElementById('goal-progress-input');
+      const editIdInput = document.getElementById('goal-edit-id');
+
+      const title = titleInput.value.trim();
+      if (!title) {
+        titleInput.focus();
+        return;
+      }
+
+      const goalData = {
+        title,
+        description: descInput.value,
+        progress: parseInt(progressInput.value) || 0
+      };
+
+      const editId = editIdInput.value;
+      if (editId) {
+        editGoal(editId, goalData);
+      } else {
+        addGoal(goalData);
+      }
+
+      hideGoalModal();
+    }
+
+    // Initialize goals system
+    function initGoals() {
+      loadGoalsFromStorage();
+
+      // Sidebar toggle button
+      const toggleBtn = document.getElementById('goals-toggle-btn');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => toggleGoalsSidebar());
+      }
+
+      // Sidebar close button
+      const closeBtn = document.getElementById('goals-sidebar-close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => toggleGoalsSidebar(false));
+      }
+
+      // Close sidebar when clicking outside
+      const sidebar = document.getElementById('goals-sidebar');
+      const goalModalOverlay = document.getElementById('goal-modal-overlay');
+      document.addEventListener('click', (e) => {
+        if (!goalsData.sidebarVisible) return;
+
+        // Check if click is outside sidebar and toggle button
+        const isClickInsideSidebar = sidebar && sidebar.contains(e.target);
+        const isClickOnToggle = toggleBtn && toggleBtn.contains(e.target);
+        const isClickOnGoalModal = goalModalOverlay && goalModalOverlay.contains(e.target);
+
+        if (!isClickInsideSidebar && !isClickOnToggle && !isClickOnGoalModal) {
+          toggleGoalsSidebar(false);
+        }
+      });
+
+      // Goal modal events
+      const modalOverlay = document.getElementById('goal-modal-overlay');
+      const modalCancel = document.getElementById('goal-modal-cancel');
+      const modalSubmit = document.getElementById('goal-modal-submit');
+
+      if (modalCancel) {
+        modalCancel.addEventListener('click', hideGoalModal);
+      }
+
+      // Close modal when clicking outside (on overlay)
+      if (modalOverlay) {
+        modalOverlay.addEventListener('click', (e) => {
+          // Only close if clicking directly on the overlay, not the modal content
+          if (e.target === modalOverlay) {
+            hideGoalModal();
+          }
+        });
+      }
+
+      if (modalSubmit) {
+        modalSubmit.addEventListener('click', handleGoalSubmit);
+      }
+
+      // Progress slider value display
+      const progressInput = document.getElementById('goal-progress-input');
+      const progressDisplay = document.getElementById('goal-progress-display');
+      if (progressInput && progressDisplay) {
+        progressInput.addEventListener('input', (e) => {
+          progressDisplay.textContent = e.target.value + '%';
+        });
+      }
+
+
+      // Handle Enter key in goal title
+      const titleInput = document.getElementById('goal-title-input');
+      if (titleInput) {
+        titleInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleGoalSubmit();
+          } else if (e.key === 'Escape') {
+            hideGoalModal();
+          }
+        });
+      }
+
+      // Render goals
+      renderGoals();
+      updateGoalsToggleButton();
+
+      // Restore sidebar visibility
+      if (goalsData.sidebarVisible) {
+        toggleGoalsSidebar(true);
+      }
+    }
+
+    // ============ END GOALS MANAGEMENT ============
+
     function applyNightLightState() {
       const isActive = !!nightLightEnabled;
       document.body.classList.toggle("nightlight-active", isActive);
@@ -2021,6 +3023,9 @@
         afkToggleBtn.addEventListener("click", () => toggleAfkMode());
       }
       applyAfkModeState();
+
+      // Initialize Goals system
+      initGoals();
 
       const ghRefresh = document.getElementById("github-refresh");
       const ghRefreshInline = document.getElementById(
